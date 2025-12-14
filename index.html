@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCGame Rakeback Claim - Verified User</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            width: 100%;
+            max-width: 400px;
+            animation: slideIn 0.5s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .verified-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: white;
+            color: #4CAF50;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 5px solid white;
+            margin: 0 auto 15px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #4CAF50;
+            overflow: hidden;
+        }
+        
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .username {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .vip-level {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .user-id {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 25px;
+        }
+        
+        .info-section {
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            color: #333;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            color: #4CAF50;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .stat-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            border-color: #4CAF50;
+            transform: translateY(-2px);
+        }
+        
+        .stat-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .deposit-message {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+        
+        .deposit-title {
+            color: #856404;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .deposit-text {
+            color: #856404;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .claim-button {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .claim-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(76, 175, 80, 0.3);
+        }
+        
+        .claim-button:active {
+            transform: translateY(0);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4CAF50;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="verified-badge">
+                <i class="fas fa-check"></i>
+            </div>
+            <div class="profile-image" id="profileImage">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="username" id="username">Loading...</div>
+            <div class="vip-level" id="vipLevel">VIP 0</div>
+            <div class="user-id" id="userId">User ID: Loading...</div>
+        </div>
+        
+        <div class="content">
+            <div class="info-section">
+                <div class="section-title">
+                    <i class="fas fa-medal"></i>
+                    <span>Statistics</span>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalWins">0</div>
+                        <div class="stat-label">Total Wins</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalBets">0</div>
+                        <div class="stat-label">Total Bets</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalWagered">$0</div>
+                        <div class="stat-label">Total Wagered</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="winRate">0%</div>
+                        <div class="stat-label">Win Rate</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="deposit-message">
+                <div class="deposit-title">
+                    <i class="fas fa-coins"></i>
+                    <span>Deposit Information</span>
+                </div>
+                <div class="deposit-text" id="depositMessage">
+                    Your account is verified! To claim your rakeback, please make a minimum deposit.
+                    Your rakeback will be unlocked within 2-3 minutes after deposit.
+                </div>
+            </div>
+            
+            <button class="claim-button" onclick="claimRakeback()">
+                <i class="fas fa-gift"></i>
+                CLAIM YOUR RAKEBACK NOW
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        // Get UID from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const uid = urlParams.get('uid');
+        
+        // Sample data for demonstration
+        // In production, you would fetch this from your backend API
+        const userData = {
+            username: "Luna75",
+            vipLevel: "GOLD VIP33",
+            userId: "12545608",
+            totalWins: "72032",
+            totalBets: "223478",
+            totalWagered: "R$14,27,289.05",
+            profileImage: `https://img2.distributedresourcestorage.com/avatar/12545608/s`
+        };
+        
+        // Calculate win rate
+        function calculateWinRate(wins, bets) {
+            if (bets === 0) return "0%";
+            const rate = (wins / bets * 100).toFixed(1);
+            return rate + "%";
+        }
+        
+        // Format numbers with commas
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        
+        // Update the HTML with user data
+        function updateUserProfile() {
+            document.getElementById('username').textContent = userData.username;
+            document.getElementById('vipLevel').textContent = userData.vipLevel;
+            document.getElementById('userId').textContent = `User ID: ${userData.userId}`;
+            document.getElementById('totalWins').textContent = formatNumber(userData.totalWins);
+            document.getElementById('totalBets').textContent = formatNumber(userData.totalBets);
+            document.getElementById('totalWagered').textContent = userData.totalWagered;
+            
+            const winRate = calculateWinRate(
+                parseInt(userData.totalWins.replace(/,/g, '')), 
+                parseInt(userData.totalBets.replace(/,/g, ''))
+            );
+            document.getElementById('winRate').textContent = winRate;
+            
+            // Set profile image
+            const profileImage = document.getElementById('profileImage');
+            profileImage.innerHTML = '';
+            const img = document.createElement('img');
+            img.src = userData.profileImage;
+            img.alt = userData.username;
+            img.onerror = function() {
+                this.onerror = null;
+                this.src = '';
+                profileImage.innerHTML = '<i class="fas fa-user"></i>';
+            };
+            profileImage.appendChild(img);
+            
+            // Customize deposit message based on VIP level
+            const depositMessage = document.getElementById('depositMessage');
+            if (userData.vipLevel.includes('GOLD') || userData.vipLevel.includes('VIP')) {
+                depositMessage.innerHTML = `
+                    <strong>Dear ${userData.username},</strong><br><br>
+                    Your account is <strong>VERIFIED ✅</strong> and eligible for rakeback rewards!<br><br>
+                    To unlock your rakeback, please make a minimum deposit.<br>
+                    Your rakeback will be available within 2-3 minutes after successful deposit.
+                `;
+            }
+        }
+        
+        // Claim rakeback function
+        function claimRakeback() {
+            const button = document.querySelector('.claim-button');
+            const originalText = button.innerHTML;
+            
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            button.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                alert('✅ Rakeback claim request submitted successfully!\n\nOur team will process your request within 2-3 minutes.');
+                button.innerHTML = originalText;
+                button.disabled = false;
+                
+                // Close the WebApp after successful claim
+                if (window.Telegram && window.Telegram.WebApp) {
+                    setTimeout(() => {
+                        window.Telegram.WebApp.close();
+                    }, 2000);
+                }
+            }, 1500);
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            if (uid) {
+                // In production: Fetch user data from your backend using the UID
+                // For now, we'll use the sample data
+                updateUserProfile();
+                
+                // If you have a backend API, you would fetch real data here:
+                /*
+                fetch(`/api/user/${uid}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        userData = data;
+                        updateUserProfile();
+                    })
+                    .catch(error => {
+                        console.error('Error fetching user data:', error);
+                        updateUserProfile(); // Fallback to sample data
+                    });
+                */
+            } else {
+                // No UID provided, show error
+                document.querySelector('.container').innerHTML = `
+                    <div class="header" style="background: #dc3545;">
+                        <div style="padding: 40px 20px; text-align: center;">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 50px; margin-bottom: 20px;"></i>
+                            <h2 style="color: white; margin-bottom: 10px;">Error</h2>
+                            <p style="color: rgba(255,255,255,0.9);">No user ID provided.</p>
+                        </div>
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
