@@ -3,229 +3,335 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BCGame Rakeback Claim - Verified User</title>
+    <title>BCGame - Verified User Rakeback</title>
     <style>
+        /* BCGame Dark Theme Variables */
+        :root {
+            /* Main colors from BCGame */
+            --brand: 44 217 125; /* BCGame green */
+            --brand-rgb: rgb(44, 217, 125);
+            --error: 205 48 48;
+            --warning: 204 122 26;
+            --primary: 23 26 26;
+            --secondary: 95 109 109;
+            --tertiary: 146 160 160;
+            
+            /* Dark theme layers */
+            --layer1: 30 33 33;     /* #1e2121 */
+            --layer2: 35 38 38;     /* #232626 */
+            --layer3: 41 45 46;     /* #292d2e */
+            --layer4: 50 55 56;     /* #323738 */
+            --layer5: 58 65 66;     /* #3a4142 */
+            --layer6: 74 83 84;     /* #4a5354 */
+            
+            /* Text colors */
+            --text-primary: 255 255 255;
+            --text-secondary: 179 190 193;
+            --text-tertiary: 132 145 148;
+            
+            /* UI Elements */
+            --border-color: 58 65 66; /* #3a4142 */
+            --input-bg: 58 65 66;     /* #3a4142 */
+            --card-bg: 35 38 38;      /* #232626 */
+            --site-bg: 35 38 38;      /* #232626 */
+            
+            /* Convert to RGB */
+            --layer1-rgb: rgb(var(--layer1));
+            --layer2-rgb: rgb(var(--layer2));
+            --layer3-rgb: rgb(var(--layer3));
+            --layer4-rgb: rgb(var(--layer4));
+            --layer5-rgb: rgb(var(--layer5));
+            --layer6-rgb: rgb(var(--layer6));
+            --text-primary-rgb: rgb(var(--text-primary));
+            --text-secondary-rgb: rgb(var(--text-secondary));
+            --text-tertiary-rgb: rgb(var(--text-tertiary));
+            --border-color-rgb: rgb(var(--border-color));
+            --input-bg-rgb: rgb(var(--input-bg));
+            --card-bg-rgb: rgb(var(--card-bg));
+            
+            /* Spacing */
+            --radius-sm: .125rem;
+            --radius-md: .375rem;
+            --radius-lg: .5rem;
+            --radius-xl: .75rem;
+            --radius-2xl: 1rem;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border-width: 0;
+            border-style: solid;
+            border-color: currentColor;
         }
         
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-color: var(--site-bg);
+            color: var(--text-primary-rgb);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            padding: 0;
+            margin: 0;
         }
         
         .container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-            width: 100%;
-            max-width: 400px;
-            animation: slideIn 0.5s ease;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 16px;
         }
         
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
+        /* Header Styles */
         .header {
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-            color: white;
-            padding: 25px;
-            text-align: center;
+            background: var(--layer2-rgb);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border-color-rgb);
             position: relative;
+            overflow: hidden;
         }
         
         .verified-badge {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            background: white;
-            color: #4CAF50;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            top: 12px;
+            right: 12px;
+            background: var(--brand-rgb);
+            color: white;
+            padding: 4px 12px;
+            border-radius: var(--radius-md);
+            font-size: 12px;
+            font-weight: 600;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            gap: 4px;
         }
         
-        .profile-image {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 5px solid white;
-            margin: 0 auto 15px;
-            background: #f0f0f0;
+        .profile-section {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            color: #4CAF50;
+            gap: 16px;
+        }
+        
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--layer4-rgb);
             overflow: hidden;
+            border: 3px solid var(--brand-rgb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        .profile-image img {
+        .profile-avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
         
-        .username {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 5px;
+        .profile-info {
+            flex: 1;
         }
         
-        .vip-level {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 14px;
+        .username {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary-rgb);
+            margin-bottom: 4px;
+        }
+        
+        .vip-badge {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #000;
+            padding: 4px 12px;
+            border-radius: var(--radius-md);
+            font-size: 12px;
+            font-weight: 700;
             display: inline-block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         
         .user-id {
-            font-size: 14px;
-            opacity: 0.9;
+            color: var(--text-secondary-rgb);
+            font-size: 13px;
+            font-family: monospace;
         }
         
-        .content {
-            padding: 25px;
-        }
-        
-        .info-section {
-            margin-bottom: 25px;
-        }
-        
-        .section-title {
-            color: #333;
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .section-title i {
-            color: #4CAF50;
-        }
-        
+        /* Stats Grid */
         .stats-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
         }
         
         .stat-card {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 15px;
-            text-align: center;
-            border: 2px solid #e9ecef;
-            transition: all 0.3s ease;
+            background: var(--layer2-rgb);
+            border: 1px solid var(--border-color-rgb);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            transition: all 0.2s ease;
         }
         
         .stat-card:hover {
-            border-color: #4CAF50;
+            border-color: var(--brand-rgb);
             transform: translateY(-2px);
         }
         
         .stat-value {
-            font-size: 18px;
-            font-weight: bold;
-            color: #4CAF50;
-            margin-bottom: 5px;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--brand-rgb);
+            margin-bottom: 4px;
         }
         
         .stat-label {
+            color: var(--text-secondary-rgb);
             font-size: 12px;
-            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
-        .deposit-message {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 25px 0;
+        /* Detailed Stats */
+        .detailed-stats {
+            background: var(--layer2-rgb);
+            border: 1px solid var(--border-color-rgb);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin-bottom: 16px;
         }
         
-        .deposit-title {
-            color: #856404;
+        .section-title {
+            color: var(--text-primary-rgb);
+            font-size: 16px;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
         
-        .deposit-text {
-            color: #856404;
+        .section-title i {
+            color: var(--brand-rgb);
+        }
+        
+        .stats-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: var(--layer3-rgb);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color-rgb);
+        }
+        
+        .stat-item-label {
+            color: var(--text-secondary-rgb);
             font-size: 14px;
-            line-height: 1.5;
+        }
+        
+        .stat-item-value {
+            color: var(--text-primary-rgb);
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        /* Deposit Message */
+        .deposit-message {
+            background: linear-gradient(135deg, rgba(44, 217, 125, 0.1) 0%, rgba(44, 217, 125, 0.05) 100%);
+            border: 1px solid rgba(44, 217, 125, 0.3);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .deposit-title {
+            color: var(--brand-rgb);
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .deposit-content {
+            color: var(--text-secondary-rgb);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .deposit-highlight {
+            color: var(--brand-rgb);
+            font-weight: 600;
+        }
+        
+        /* Claim Button */
+        .claim-section {
+            position: sticky;
+            bottom: 16px;
+            margin-top: 20px;
         }
         
         .claim-button {
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            background: linear-gradient(135deg, var(--brand-rgb) 0%, rgba(44, 217, 125, 0.9) 100%);
             color: white;
             border: none;
-            padding: 18px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
             width: 100%;
+            padding: 18px 24px;
+            border-radius: var(--radius-lg);
+            font-size: 16px;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 12px;
+            box-shadow: 0 4px 12px rgba(44, 217, 125, 0.3);
         }
         
         .claim-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(76, 175, 80, 0.3);
+            box-shadow: 0 8px 20px rgba(44, 217, 125, 0.4);
         }
         
         .claim-button:active {
             transform: translateY(0);
         }
         
+        /* Loading State */
         .loading {
-            text-align: center;
-            padding: 40px;
-            color: #666;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            gap: 20px;
         }
         
         .loading-spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #4CAF50;
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--layer4-rgb);
+            border-top: 3px solid var(--brand-rgb);
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+        }
+        
+        .loading-text {
+            color: var(--text-secondary-rgb);
+            font-size: 14px;
         }
         
         @keyframes spin {
@@ -233,77 +339,210 @@
             100% { transform: rotate(360deg); }
         }
         
+        /* Error State */
+        .error-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            gap: 16px;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .error-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(205, 48, 48, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgb(var(--error));
+            font-size: 28px;
+        }
+        
+        .error-title {
+            color: var(--text-primary-rgb);
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .error-message {
+            color: var(--text-secondary-rgb);
+            font-size: 14px;
+            max-width: 300px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 480px) {
+            .container {
+                padding: 12px;
+            }
+            
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-card {
+                padding: 12px;
+            }
+            
+            .stat-value {
+                font-size: 18px;
+            }
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--layer2-rgb);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--layer5-rgb);
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--layer6-rgb);
+        }
+        
+        /* Hide elements */
         .hidden {
-            display: none;
+            display: none !important;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="verified-badge">
-                <i class="fas fa-check"></i>
-            </div>
-            <div class="profile-image" id="profileImage">
-                <i class="fas fa-user"></i>
-            </div>
-            <div class="username" id="username">Loading...</div>
-            <div class="vip-level" id="vipLevel">VIP 0</div>
-            <div class="user-id" id="userId">User ID: Loading...</div>
+    <div class="container" id="mainContent">
+        <!-- Loading State -->
+        <div class="loading" id="loadingState">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Loading your profile...</div>
         </div>
         
-        <div class="content">
-            <div class="info-section">
-                <div class="section-title">
-                    <i class="fas fa-medal"></i>
-                    <span>Statistics</span>
+        <!-- Content (hidden by default) -->
+        <div class="hidden" id="content">
+            <!-- Header with Profile -->
+            <div class="header">
+                <div class="verified-badge">
+                    <i class="fas fa-check-circle"></i>
+                    VERIFIED
                 </div>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-value" id="totalWins">0</div>
-                        <div class="stat-label">Total Wins</div>
+                
+                <div class="profile-section">
+                    <div class="profile-avatar" id="profileAvatar">
+                        <i class="fas fa-user"></i>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="totalBets">0</div>
-                        <div class="stat-label">Total Bets</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="totalWagered">$0</div>
-                        <div class="stat-label">Total Wagered</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="winRate">0%</div>
-                        <div class="stat-label">Win Rate</div>
+                    
+                    <div class="profile-info">
+                        <div class="username" id="username">Loading...</div>
+                        <div class="vip-badge" id="vipLevel">VIP 0</div>
+                        <div class="user-id" id="userId">User ID: #00000000</div>
                     </div>
                 </div>
             </div>
             
+            <!-- Quick Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalWins">0</div>
+                    <div class="stat-label">Total Wins</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalBets">0</div>
+                    <div class="stat-label">Total Bets</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalWagered">$0</div>
+                    <div class="stat-label">Total Wagered</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="winRate">0%</div>
+                    <div class="stat-label">Win Rate</div>
+                </div>
+            </div>
+            
+            <!-- Detailed Statistics -->
+            <div class="detailed-stats">
+                <div class="section-title">
+                    <i class="fas fa-chart-bar"></i>
+                    Detailed Statistics
+                </div>
+                
+                <div class="stats-list">
+                    <div class="stat-item">
+                        <span class="stat-item-label">Total Wagered</span>
+                        <span class="stat-item-value" id="detailedWagered">$0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-item-label">Total Bets</span>
+                        <span class="stat-item-value" id="detailedBets">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-item-label">Total Wins</span>
+                        <span class="stat-item-value" id="detailedWins">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-item-label">Win Rate</span>
+                        <span class="stat-item-value" id="detailedWinRate">0%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Deposit Message -->
             <div class="deposit-message">
                 <div class="deposit-title">
                     <i class="fas fa-coins"></i>
-                    <span>Deposit Information</span>
+                    Deposit Information
                 </div>
-                <div class="deposit-text" id="depositMessage">
-                    Your account is verified! To claim your rakeback, please make a minimum deposit.
-                    Your rakeback will be unlocked within 2-3 minutes after deposit.
+                <div class="deposit-content" id="depositMessage">
+                    <span class="deposit-highlight">Dear User,</span><br><br>
+                    Your account is <span class="deposit-highlight">VERIFIED</span> and eligible for rakeback rewards!<br><br>
+                    To unlock your rakeback, please make a minimum deposit.<br>
+                    Your rakeback will be available within <span class="deposit-highlight">2-3 minutes</span> after successful deposit.
                 </div>
             </div>
             
-            <button class="claim-button" onclick="claimRakeback()">
-                <i class="fas fa-gift"></i>
-                CLAIM YOUR RAKEBACK NOW
-            </button>
+            <!-- Claim Button -->
+            <div class="claim-section">
+                <button class="claim-button" onclick="claimRakeback()" id="claimBtn">
+                    <i class="fas fa-gift"></i>
+                    CLAIM YOUR RAKEBACK NOW
+                </button>
+            </div>
+        </div>
+        
+        <!-- Error State -->
+        <div class="error-state hidden" id="errorState">
+            <div class="error-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="error-title">Profile Not Found</div>
+            <div class="error-message">
+                We couldn't load your profile data.<br>
+                Please try again or contact support.
+            </div>
         </div>
     </div>
-    
+
     <script>
         // Get UID from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const uid = urlParams.get('uid');
         
-        // Sample data for demonstration
-        // In production, you would fetch this from your backend API
+        // Sample user data structure (in production, fetch from API)
         const userData = {
             username: "Luna75",
             vipLevel: "GOLD VIP33",
@@ -311,80 +550,114 @@
             totalWins: "72032",
             totalBets: "223478",
             totalWagered: "R$14,27,289.05",
-            profileImage: `https://img2.distributedresourcestorage.com/avatar/12545608/s`
+            profileImage: `https://img2.distributedresourcestorage.com/avatar/12545608/s`,
+            verified: true
         };
         
-        // Calculate win rate
-        function calculateWinRate(wins, bets) {
-            if (bets === 0) return "0%";
-            const rate = (wins / bets * 100).toFixed(1);
-            return rate + "%";
-        }
-        
-        // Format numbers with commas
+        // Format number with commas
         function formatNumber(num) {
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
         
-        // Update the HTML with user data
-        function updateUserProfile() {
-            document.getElementById('username').textContent = userData.username;
-            document.getElementById('vipLevel').textContent = userData.vipLevel;
-            document.getElementById('userId').textContent = `User ID: ${userData.userId}`;
-            document.getElementById('totalWins').textContent = formatNumber(userData.totalWins);
-            document.getElementById('totalBets').textContent = formatNumber(userData.totalBets);
-            document.getElementById('totalWagered').textContent = userData.totalWagered;
+        // Format currency
+        function formatCurrency(amount) {
+            if (amount.startsWith('R$')) {
+                return amount; // Already formatted
+            }
+            return '$' + formatNumber(amount);
+        }
+        
+        // Calculate win rate
+        function calculateWinRate(wins, bets) {
+            if (!wins || !bets || bets === 0) return "0%";
+            const winNum = parseInt(wins.toString().replace(/,/g, ''));
+            const betNum = parseInt(bets.toString().replace(/,/g, ''));
+            const rate = (winNum / betNum * 100).toFixed(1);
+            return rate + "%";
+        }
+        
+        // Parse wagered amount to number
+        function parseWageredAmount(wagered) {
+            if (!wagered) return 0;
+            // Remove currency symbol and commas
+            const cleaned = wagered.replace(/[^0-9.]/g, '');
+            return parseFloat(cleaned) || 0;
+        }
+        
+        // Update UI with user data
+        function updateUserProfile(data) {
+            // Update basic info
+            document.getElementById('username').textContent = data.username;
+            document.getElementById('vipLevel').textContent = data.vipLevel;
+            document.getElementById('userId').textContent = `User ID: #${data.userId}`;
             
-            const winRate = calculateWinRate(
-                parseInt(userData.totalWins.replace(/,/g, '')), 
-                parseInt(userData.totalBets.replace(/,/g, ''))
-            );
-            document.getElementById('winRate').textContent = winRate;
-            
-            // Set profile image
-            const profileImage = document.getElementById('profileImage');
-            profileImage.innerHTML = '';
+            // Update profile image
+            const profileAvatar = document.getElementById('profileAvatar');
+            profileAvatar.innerHTML = '';
             const img = document.createElement('img');
-            img.src = userData.profileImage;
-            img.alt = userData.username;
+            img.src = data.profileImage;
+            img.alt = data.username;
             img.onerror = function() {
                 this.onerror = null;
-                this.src = '';
-                profileImage.innerHTML = '<i class="fas fa-user"></i>';
+                profileAvatar.innerHTML = '<i class="fas fa-user"></i>';
+                profileAvatar.style.fontSize = '32px';
+                profileAvatar.style.color = 'var(--text-secondary-rgb)';
             };
-            profileImage.appendChild(img);
+            profileAvatar.appendChild(img);
             
-            // Customize deposit message based on VIP level
+            // Update quick stats
+            document.getElementById('totalWins').textContent = formatNumber(data.totalWins);
+            document.getElementById('totalBets').textContent = formatNumber(data.totalBets);
+            document.getElementById('totalWagered').textContent = data.totalWagered;
+            document.getElementById('winRate').textContent = calculateWinRate(data.totalWins, data.totalBets);
+            
+            // Update detailed stats
+            document.getElementById('detailedWagered').textContent = data.totalWagered;
+            document.getElementById('detailedBets').textContent = formatNumber(data.totalBets);
+            document.getElementById('detailedWins').textContent = formatNumber(data.totalWins);
+            document.getElementById('detailedWinRate').textContent = calculateWinRate(data.totalWins, data.totalBets);
+            
+            // Customize deposit message
             const depositMessage = document.getElementById('depositMessage');
-            if (userData.vipLevel.includes('GOLD') || userData.vipLevel.includes('VIP')) {
+            if (data.verified) {
                 depositMessage.innerHTML = `
-                    <strong>Dear ${userData.username},</strong><br><br>
-                    Your account is <strong>VERIFIED ✅</strong> and eligible for rakeback rewards!<br><br>
+                    <span class="deposit-highlight">Dear ${data.username},</span><br><br>
+                    Your account is <span class="deposit-highlight">VERIFIED ✅</span> and eligible for rakeback rewards!<br><br>
+                    <span class="deposit-highlight">VIP Status:</span> ${data.vipLevel}<br>
+                    <span class="deposit-highlight">Total Wagered:</span> ${data.totalWagered}<br><br>
                     To unlock your rakeback, please make a minimum deposit.<br>
-                    Your rakeback will be available within 2-3 minutes after successful deposit.
+                    Your rakeback will be available within <span class="deposit-highlight">2-3 minutes</span> after successful deposit.
                 `;
             }
+            
+            // Show content
+            document.getElementById('loadingState').classList.add('hidden');
+            document.getElementById('content').classList.remove('hidden');
         }
         
         // Claim rakeback function
         function claimRakeback() {
-            const button = document.querySelector('.claim-button');
-            const originalText = button.innerHTML;
+            const button = document.getElementById('claimBtn');
+            const originalHTML = button.innerHTML;
             
+            // Show loading state
             button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
             button.disabled = true;
             
             // Simulate API call
             setTimeout(() => {
-                alert('✅ Rakeback claim request submitted successfully!\n\nOur team will process your request within 2-3 minutes.');
-                button.innerHTML = originalText;
+                // Success message
+                alert('✅ Rakeback claim submitted successfully!\n\nYour request is being processed. You will receive your rakeback within 2-3 minutes.');
+                
+                // Reset button
+                button.innerHTML = originalHTML;
                 button.disabled = false;
                 
-                // Close the WebApp after successful claim
+                // Optional: Close WebApp after success
                 if (window.Telegram && window.Telegram.WebApp) {
                     setTimeout(() => {
                         window.Telegram.WebApp.close();
-                    }, 2000);
+                    }, 1500);
                 }
             }, 1500);
         }
@@ -392,36 +665,54 @@
         // Initialize when page loads
         document.addEventListener('DOMContentLoaded', function() {
             if (uid) {
-                // In production: Fetch user data from your backend using the UID
-                // For now, we'll use the sample data
-                updateUserProfile();
+                // In production, you would fetch real data from your backend API
+                // Example: fetch(`https://your-api.com/user/${uid}`)
+                // For now, simulate API call with sample data
                 
-                // If you have a backend API, you would fetch real data here:
+                setTimeout(() => {
+                    // Check if we got valid data
+                    if (userData && userData.username) {
+                        updateUserProfile(userData);
+                    } else {
+                        // Show error state
+                        document.getElementById('loadingState').classList.add('hidden');
+                        document.getElementById('errorState').classList.remove('hidden');
+                    }
+                }, 1000);
+                
+                // Real API call would look like:
                 /*
                 fetch(`/api/user/${uid}`)
                     .then(response => response.json())
                     .then(data => {
-                        userData = data;
-                        updateUserProfile();
+                        if (data.success) {
+                            updateUserProfile(data.user);
+                        } else {
+                            throw new Error(data.message || 'Failed to load profile');
+                        }
                     })
                     .catch(error => {
-                        console.error('Error fetching user data:', error);
-                        updateUserProfile(); // Fallback to sample data
+                        console.error('Error:', error);
+                        document.getElementById('loadingState').classList.add('hidden');
+                        document.getElementById('errorState').classList.remove('hidden');
                     });
                 */
             } else {
-                // No UID provided, show error
-                document.querySelector('.container').innerHTML = `
-                    <div class="header" style="background: #dc3545;">
-                        <div style="padding: 40px 20px; text-align: center;">
-                            <i class="fas fa-exclamation-triangle" style="font-size: 50px; margin-bottom: 20px;"></i>
-                            <h2 style="color: white; margin-bottom: 10px;">Error</h2>
-                            <p style="color: rgba(255,255,255,0.9);">No user ID provided.</p>
-                        </div>
-                    </div>
-                `;
+                // No UID provided
+                document.getElementById('loadingState').classList.add('hidden');
+                document.getElementById('errorState').classList.remove('hidden');
             }
         });
+        
+        // Telegram WebApp integration
+        if (window.Telegram && window.Telegram.WebApp) {
+            Telegram.WebApp.ready();
+            Telegram.WebApp.expand();
+            
+            // Set theme colors
+            Telegram.WebApp.setHeaderColor('#232626'); // layer2 color
+            Telegram.WebApp.setBackgroundColor('#232626'); // site-bg color
+        }
     </script>
 </body>
 </html>
